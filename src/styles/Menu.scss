@@ -1,0 +1,28 @@
+.main-menu {
+  position: fixed;
+  width: 240px;
+  min-height: 100vh ;
+  background: #11101d;
+   
+    .container {
+      padding: 0;
+        
+        .navLink {
+          color: #fff;
+          text-decoration: none;
+          
+            &.active > div {
+              background: #fff;
+              color: #111;
+
+                svg {
+                    color: #111;
+                  }
+            }
+            
+            svg {
+              color: #fff;
+            }
+        }
+    }
+}

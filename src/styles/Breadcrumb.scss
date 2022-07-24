@@ -1,0 +1,28 @@
+.custom-breadcrumb {
+  margin-top: 20px;
+  font-size: 16px;
+
+  a {
+    text-decoration: none;
+    text-transform: capitalize;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  p {
+    text-transform: capitalize;
+  }
+
+  .gohome {
+    display: flex;
+    align-items: center;
+
+      span:first-child {
+        margin: 4px 4px 0 0;
+        color: #111;
+      }
+  }
+
+}

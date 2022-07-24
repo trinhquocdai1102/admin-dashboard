@@ -1,0 +1,126 @@
+.main-footer {
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 28px 100px 4px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-top: 1px solid #111;
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+      p {
+          color: #000
+        }
+
+      .section {
+        margin-right: 28px;
+
+          &.aboutus {
+              width: 35%;
+            }
+
+          &.quickLinks {
+            position: relative;
+            width: 20%;
+
+              a {
+                color: #000;
+                text-decoration: none;
+                margin-bottom: 12px;
+                display: inline-block;
+
+                &:hover {
+                  color: #999
+                }
+              }
+          }
+
+          &.contact {
+            width: calc(35% - 60px);
+            margin-right: 0 !important;
+
+            .info {
+              position: relative;
+
+              li {
+                display: flex;
+                margin-bottom: 16px;
+
+                  span:nth-child(1) {
+                    color: #999;
+                    font-size: 20px;
+                    margin-right: 12px;
+                  }
+
+                  span {
+                    color: #000;
+
+                      a {
+                        color: #000000;
+
+                          &:hover {
+                            color: #999
+                          }
+                      }
+                  }
+              }
+            }
+          }
+
+          h2 {
+            position: relative;
+            color: #000;
+            font-weight: 500;
+            margin-bottom: 16px;
+
+              &:before {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 50px;
+                height: 2px;
+                background: #f00;
+              }
+          }
+                  
+            .social {
+              margin-top: 20px;
+              display: flex;
+              justify-content: flex-start;
+                a {
+                  width: 40px;
+                  height: 40px;
+                  background: #222;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  margin-right: 10px;
+                  text-decoration: none;
+                  border-radius: 4px;
+
+                  &:hover {
+                    background: #999;
+                  }
+
+                  svg {
+                    color: #fff;
+                    font-size: 20px;
+                  }
+                }
+            }     
+      }
+  }
+    .copyrightText {
+      width: 100%;
+      color: #666;
+      padding: 8px 100px;
+      text-align: center;
+    }
+}
