@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import HeaderNavbar from './Header/HeaderNavbar';
 import { navbarHeight, menuWidth } from '../../ultis';
 import Footer from './Footer/Footer';
+import SnackbarC from '../Snackbar/Snackbar';
 
 interface Props extends PropsWithChildren {}
 
@@ -19,13 +20,13 @@ const MainLayout: FC<Props> = ({ children }) => {
           <Grid item xs={12}>
             <HeaderNavbar />
           </Grid>
-          <Grid item xs={2} sx={{ marginTop: navbarHeight }}>
+          <Grid item xs={2} sx={{ marginTop: navbarHeight + 'px' }}>
             <MenuComponent />
           </Grid>
-          <Grid item xs={10} sx={{ marginTop: navbarHeight }}>
+          <Grid item xs={10} sx={{ marginLeft: menuWidth + 20 + 'px' }}>
             {children}
           </Grid>
-          <Grid item xs={12} sx={{ marginLeft: menuWidth }}>
+          <Grid item xs={12} sx={{ marginLeft: menuWidth + 'px' }}>
             <Footer />
           </Grid>
         </Grid>

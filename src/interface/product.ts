@@ -7,15 +7,20 @@ export interface IProduct {
   color: string;
   amount: string;
   thumbnailUrl: string;
-  totalItem: number;
   createdAt: string;
   updatedAt: string;
   checked: boolean;
 }
 
-export interface ProductItemWithUpdateButton {
+export interface ICreateProduct {
+  categoryId: string;
   id: string;
-  price: string;
+  name: string;
+  description: string;
+  price: number | string;
+  color: string;
+  amount: number | string;
+  thumbnailUrl: string;
 }
 
 export interface IProductFilter {

@@ -2,8 +2,8 @@ import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { perPage } from './utils';
-import SelectC from '../../components/Select/Select';
+import { perPage } from '../utils';
+import SelectC from '../../../components/Select/Select';
 import { Box } from '@mui/material';
 
 const theme = createTheme({
@@ -12,6 +12,16 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           padding: '20px 12px 0',
+        },
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            border: '1px solid',
+            borderRadius: '1px',
+          },
         },
       },
     },
@@ -25,7 +35,7 @@ const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          width: '100px',
+          width: '108px',
           textAlign: 'center',
         },
       },
@@ -36,6 +46,7 @@ const theme = createTheme({
           top: '-2px',
           fontSize: '14px',
           fontWeight: 'bold',
+          color: '#023e8a',
         },
       },
     },
@@ -69,16 +80,15 @@ const theme = createTheme({
 
 interface Props {
   count: any;
+  totalItem: number;
   setPageNum: any;
-  pageNum: number;
-  itemPerPage: number;
   setItemPerPage: any;
 }
 
 const PaginationTable = (props: Props) => {
-  const { count, itemPerPage, pageNum, setPageNum, setItemPerPage } = props;
+  const { count, setPageNum, setItemPerPage, totalItem } = props;
 
-  const handleChangePage = (event: any, page: any) => {
+  const handleChangePage = (_event: any, page: any) => {
     setPageNum(page);
   };
   return (
@@ -91,10 +101,11 @@ const PaginationTable = (props: Props) => {
           padding: '16px 0 12px',
         }}
       >
-        <SelectC name="Per Page" listItem={perPage} setItemPerPage={setItemPerPage} />
+        <SelectC name="Per page" listItem={perPage} setItemPerPage={setItemPerPage} />
         <Box sx={{ margin: '12px 20px 0 40px' }}>
-          {itemPerPage * pageNum} of {count * itemPerPage}
-          <span style={{ fontWeight: 'bold', paddingLeft: '6px' }}>items</span>
+          <span style={{ paddingLeft: '6px' }}>Total: </span>
+          <span style={{ fontWeight: 'bold', paddingLeft: '6px' }}>{totalItem}</span>
+          <span style={{ paddingLeft: '6px' }}>items</span>
         </Box>
         <Stack spacing={2}>
           <Pagination

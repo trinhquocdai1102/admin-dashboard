@@ -5,8 +5,8 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 interface Props {
-  name: string;
-  listItem: any;
+  name?: string;
+  listItem?: any;
   labelId?: string;
   id?: string;
   value?: any;
@@ -42,6 +42,7 @@ const SelectC = (props: Props) => {
         value={value}
         label={props.name}
         onChange={handleChange}
+        defaultValue={10}
       >
         {props.listItem.map((item: any) => {
           return (

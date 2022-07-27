@@ -1,9 +1,9 @@
 import React from 'react';
 import { visuallyHidden } from '@mui/utils';
 import { TableCell, TableSortLabel, Box } from '@mui/material';
-import { CheckBoxC } from '../../components/Checkbox/Checkbox';
-import { labelProductTable } from '../../ultis/labelTable';
-import { IProduct } from '../../interface/product';
+import { CheckBoxC } from '../../../components/Checkbox/Checkbox';
+import { labelProductTable } from '../../../ultis/labelTable';
+import { IProduct } from '../../../interface/product';
 import { makeStyles } from '@material-ui/core/styles';
 
 interface Props {
@@ -40,7 +40,12 @@ const TableLabel = (props: Props) => {
       {labelProductTable.map((item) => {
         if (!item.canSort)
           return (
-            <TableCell className={classes.tableCell} key={item.name} align="left">
+            <TableCell
+              className={classes.tableCell}
+              key={item.name}
+              align="left"
+              width={item.minWidth}
+            >
               <span>{item.name}</span>
             </TableCell>
           );
@@ -49,6 +54,7 @@ const TableLabel = (props: Props) => {
             className={classes.tableCell}
             key={item.name}
             align="left"
+            width={item.minWidth}
             sortDirection={order_by === item.name ? sort : false}
           >
             <TableSortLabel

@@ -3,7 +3,7 @@ import { Facebook, Instagram, Twitter, YouTube, Map, Phone, Mail } from '@materi
 import React from 'react';
 import '../../../styles/Footer.scss';
 import { Link } from 'react-router-dom';
-import ButtonMailPhoneto from '../../ButtonMailPhoneto';
+import ButtonMailPhoneto from '../../ButtonMailPhoneto/ButtonMailPhoneto';
 
 const Footer = () => {
   return (

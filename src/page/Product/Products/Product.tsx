@@ -1,37 +1,32 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import { Modal, TableCell } from '@mui/material';
+import { TableCell } from '@mui/material';
 import { Button, TableRow } from '@mui/material';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { ROUTESNAME } from '../../routing';
-import { CheckBoxC } from '../../components/Checkbox/Checkbox';
-import { IProduct } from '../../interface/product';
+import { CheckBoxC } from '../../../components/Checkbox/Checkbox';
+import { ROUTESNAME } from '../../../routing';
+import { IProduct } from '../../../interface/product';
+import ModalC from '../../../components/Modal/Modal';
 
 interface Props {
   labelId?: any;
   product: IProduct;
   isOpacityAll: boolean;
   // handleSelectSingle(id: string): void;
-  // handleChooseToDelete(id: string): void;
-  // handleChangeValue(data: { price: string; stock: string; id: string }, index: number): void;
+  handleDeleteItem(id: string): void;
 }
 
 const ProductTable = (props: Props) => {
-  const { product, labelId, isOpacityAll } = props;
-  const [changeBg, setChangeBg] = useState(true);
+  const { product, labelId, isOpacityAll, handleDeleteItem } = props;
   const [isOpacity, setOpacity] = useState(false);
-  const [openModal, setOpenModal] = React.useState(false);
-
-  const [inputValue, setInputValue] = React.useState({
-    price: product.price,
-    amount: product.amount,
-    id: product.id,
-  });
+  const [openModal, setOpenModal] = useState(false);
+  const [dataDelete, setDataDelete] = useState('');
 
   return (
     <>
       <TableRow
+        key={product.id}
         className={isOpacity || isOpacityAll ? 'opacity' : ''}
         sx={{
           borderBottom: '1px solid black',
@@ -63,13 +58,13 @@ const ProductTable = (props: Props) => {
         </TableCell>
         <TableCell>{product?.id}</TableCell>
         <TableCell>
-          <Link to={`${ROUTESNAME.home}/${product.id}`}>{product?.name}</Link>
+          <Link to={`${ROUTESNAME.productDetail}/${product.id}`}>{product?.name}</Link>
         </TableCell>
         <TableCell>{product?.description}</TableCell>
         <TableCell>{product?.color}</TableCell>
         <TableCell>${product?.price}</TableCell>
         <TableCell>{product?.amount}</TableCell>
-        <TableCell>{moment(new Date(+product?.createdAt * 1000)).format('MMM DD,YYYY')}</TableCell>
+        <TableCell>{moment(new Date(+product?.createdAt)).format('MMM DD,YYYY')}</TableCell>
         <TableCell>
           <div style={{ borderLeft: '1px dashed #bbb', paddingLeft: '10px' }}>
             <Button
@@ -85,54 +80,23 @@ const ProductTable = (props: Props) => {
               }}
               onClick={() => {
                 setOpacity(!isOpacity);
-                // handleChooseToDelete(product?.id);
+                setOpenModal(true);
+                setDataDelete(product?.id);
               }}
             >
               <DeleteOutlineOutlinedIcon style={{ fontSize: '24px', color: '#fff' }} />
             </Button>
           </div>
         </TableCell>
+        <ModalC
+          message="Are you sure you want to delete this item?"
+          openModal={openModal}
+          handleEvent={handleDeleteItem}
+          data={dataDelete}
+          width={600}
+          setOpenModal={setOpenModal}
+        />
       </TableRow>
-      <Modal
-        open={openModal}
-        onClose={() => setOpenModal(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <div className="confirm-modal">
-          <div
-            className="behind-modal"
-            onClick={() => {
-              setOpenModal(false);
-            }}
-          ></div>
-          <div className="confirm-modal-content">
-            <div className="modal-content-text">
-              <div>Confirm Update</div>
-              <div>Do you want to update this product?</div>
-            </div>
-            <div className="modal-button">
-              <Button
-                className="btn-table-common btn-modal-yes"
-                onClick={() => {
-                  setOpenModal(false);
-                  // handleClickToUpdate(product.id, !(product.enabled == '1'));
-                }}
-              >
-                Yes
-              </Button>
-              <Button
-                className="btn-table-common btn-modal-no"
-                onClick={() => {
-                  setOpenModal(false);
-                }}
-              >
-                No
-              </Button>
-            </div>
-          </div>
-        </div>
-      </Modal>
     </>
   );
 };

@@ -15,3 +15,5 @@ export const perPage = [
     value: 50,
   },
 ];
+
+export const required = 'This field is required';

@@ -3,13 +3,12 @@ import { Breadcrumbs, Typography, Link } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../styles/Breadcrumb.scss';
 import { Home } from '@material-ui/icons';
-
 const BreadcrumbsC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const pathname = location.pathname;
-
-  const pathnames = pathname.split('/').filter((x) => x !== 'admin' && x !== '');
+  const customPathname = pathname.split('/').filter((x) => x !== 'admin' && x !== '');
+  const pathnames = [...new Set(customPathname)];
 
   return (
     <div className="custom-breadcrumb" role="presentation">
@@ -22,13 +21,18 @@ const BreadcrumbsC = () => {
         </Link>
         {pathnames.map((name, index) => {
           const route = `${[pathnames.slice(0, index + 1).join('/')]}`;
+
           const isLast = index === pathnames.length - 1;
-          return isLast ? (
-            <Typography>{name}</Typography>
-          ) : (
-            <Link key={index} onClick={() => navigate(route, { replace: true })}>
-              {name}
-            </Link>
+          return (
+            <div key={index}>
+              {isLast ? (
+                <Typography>{name}</Typography>
+              ) : (
+                <Link key={index} onClick={() => navigate(route)}>
+                  {name}
+                </Link>
+              )}
+            </div>
           );
         })}
       </Breadcrumbs>
