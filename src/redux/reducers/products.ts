@@ -29,7 +29,7 @@ const productReducer = (state: ProductState = {}, action: Action) => {
     case getType(getAllProductsWithParamsAction):
       return { ...state, product: action.payload };
     case getType(getAllProductsAction):
-      return { ...state, product: action.payload };
+      return { ...state, products: action.payload };
     case getType(getProductDetailAction):
       return { ...state, detail: action.payload };
     default:

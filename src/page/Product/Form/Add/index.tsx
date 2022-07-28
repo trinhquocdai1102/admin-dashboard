@@ -9,6 +9,7 @@ import { colorSnackbarCustom } from '../../../../ultis';
 import ProductForm from '../Form';
 import { ROUTESNAME } from '../../../../routing';
 import { useNavigate } from 'react-router-dom';
+import { getProductDetailAction } from '../../../../redux/actions/products';
 
 const AddProductPage = () => {
   const initialValues: ICreateProduct = {
@@ -33,18 +34,18 @@ const AddProductPage = () => {
 
       setLoading(false);
 
-      await dispatch(
+      dispatch(getProductDetailAction(data));
+      dispatch(
         setSnackbarAction({
           color: colorSnackbarCustom.success,
           message: 'Create product successfully',
           open: true,
         })
       );
-
       navigate(`${ROUTESNAME.productDetail}/${data.id}`);
     } catch (error) {
       setLoading(false);
-      await dispatch(
+      dispatch(
         setSnackbarAction({
           color: colorSnackbarCustom.error,
           message: `The ID must be unique`,

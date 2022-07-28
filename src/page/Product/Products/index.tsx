@@ -27,9 +27,9 @@ const ProductsPage = () => {
   const [pageNum, setPageNum] = useState(1);
   const [isOpacityAll, setOpacityAll] = useState(false);
   const [loading, setLoading] = useState(false);
-  const getAllProductsWithParam = useSelector(productWithParamSelector);
-
   const [totalItem, setTotalItem] = useState(0);
+
+  const getAllProductsWithParam = useSelector(productWithParamSelector);
 
   const count = totalItem && Math.ceil(+totalItem / itemPerPage);
 
@@ -57,8 +57,8 @@ const ProductsPage = () => {
       setLoading(false);
 
       setTotalItem(newResponse.pagination._totalRows);
-      await dispatch(getAllProductsWithParamsAction(newResponse.data));
-      await dispatch(
+      dispatch(getAllProductsWithParamsAction(newResponse.data));
+      dispatch(
         setSnackbarAction({
           color: colorSnackbarCustom.success,
           message: 'Delete product successfully',
@@ -66,7 +66,7 @@ const ProductsPage = () => {
         })
       );
     } catch (error) {
-      await dispatch(
+      dispatch(
         setSnackbarAction({
           color: colorSnackbarCustom.error,
           message: 'Failed to delete product',
@@ -89,11 +89,11 @@ const ProductsPage = () => {
 
         setLoading(false);
 
-        await dispatch(getAllProductsWithParamsAction(response.data));
-        await dispatch(getAllProductsAction(newResponse));
+        dispatch(getAllProductsWithParamsAction(response.data));
+        dispatch(getAllProductsAction(newResponse));
         setTotalItem(response.pagination._totalRows);
       } catch (error) {
-        await dispatch(
+        dispatch(
           setSnackbarAction({
             color: colorSnackbarCustom.error,
             message: 'Failed to fetch product list',

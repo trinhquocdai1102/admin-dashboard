@@ -8,6 +8,8 @@ interface Props {
   field?: any;
   type?: string;
   value?: any;
+  disabled?: boolean;
+  setValue: any;
 }
 
 const InputC = (props: Props) => {
@@ -18,7 +20,11 @@ const InputC = (props: Props) => {
       {...props.field}
       type={props.type}
       fullWidth
+      disabled={props.disabled}
       label={props.label}
+      // onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+      //   props.setValue(event.target.value);
+      // }}
       className={props.className}
     />
   );

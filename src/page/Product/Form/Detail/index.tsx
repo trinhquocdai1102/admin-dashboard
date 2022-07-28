@@ -27,7 +27,8 @@ const DetailProductPage = () => {
 
       setLoading(false);
 
-      await dispatch(
+      dispatch(getProductDetailAction(data));
+      dispatch(
         setSnackbarAction({
           color: colorSnackbarCustom.success,
           message: 'Update product successfully',
@@ -36,7 +37,7 @@ const DetailProductPage = () => {
       );
     } catch (error) {
       setLoading(false);
-      await dispatch(
+      dispatch(
         setSnackbarAction({
           color: colorSnackbarCustom.error,
           message: 'Failed to update product',
@@ -72,7 +73,13 @@ const DetailProductPage = () => {
     <Box className="main-form-product">
       <Box className="title">
         <Typography>Product Detail</Typography>
-        <Typography>( {getProductDetail?.name} )</Typography>
+        <Typography>
+          ({' '}
+          {getProductDetail?.name.length >= 20
+            ? getProductDetail?.name.slice(0, 20) + '...'
+            : getProductDetail?.name}{' '}
+          )
+        </Typography>
       </Box>
       <ProductForm
         onSubmit={onSubmit}

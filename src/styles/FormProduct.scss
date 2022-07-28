@@ -1,3 +1,28 @@
+// Shared scss
+%button {
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+
+
+
 .main-form-product {
 
   padding: 12px 0 4%;
@@ -62,7 +87,7 @@
           }
     
           input {
-            width: 80%;
+            width: 100%;
             padding: 6px 12px;
 
               &::-webkit-outer-spin-button,
@@ -100,53 +125,30 @@
 
         &.thumbnailUrl {
 
-          & > div {
-
-            &:first-child {
-              align-self: flex-start;
-              padding-top: 20px;
-            }
-
-            .list {
+          .box-image {
+              margin-top: 20px;
               display: flex;
-              gap: 12px;
-              flex-wrap: wrap;
-              width: 100%;
+              gap: 20px;
 
-                &-item {
-                  padding: 0;
-                  width: 100px;
-                  height: 100px;
-
-                    img {
-                      width: 100px;
-                      height: 100px;
-                      object-fit: fill;
-                      object-position: center
-                    }
-
-                    .cancelIcon {
-                      color: grey;
-                      position: absolute;
-                      top: -12px;
-                      right: -12px;
-                      cursor: pointer;
-                    }
+                button {
+                  @extend %button
                 }
 
-                .add-image-box {
-                  width: 100px;
-                  height: 100px;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  flex-wrap: wrap;
-
-                    svg {
-                      font-size: 80px;
-                    }
+                .buttonPreview {
+                  width: 140px;
+                  height: 32px;
+                  font-size: 12px;
+                  font-weight: 500;
+                  color: #fff;
+                  background: #118ab2;
                 }
-              }
+                
+                img {
+                  width: 200px;
+                  height: 200px;
+                  object-fit: fill;
+                  object-position: center
+                }
             }
           }
        }
@@ -158,25 +160,7 @@
       padding: 20px 0 0;
 
         button {
-          box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
-            padding: 6px 16px;
-            font-size: 0.875rem;
-            min-width: 64px;
-            box-sizing: border-box;
-            transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-            font-weight: 500;
-            line-height: 1.75;
-            border-radius: 4px;
-            letter-spacing: 0.02857em;
-            text-transform: uppercase;
-            border: none;
-            
-            &:hover {
-              cursor: pointer;
-              opacity: 0.8;
-            }
-
+          @extend %button
         }
 
         .addButton {

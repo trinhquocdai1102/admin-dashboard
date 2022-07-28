@@ -18,8 +18,6 @@ const SnackbarC = (props: Props) => {
   const setSnackbar = useSelector(snackbarSelector);
   const dispatch = useDispatch();
 
-  console.log(setSnackbar);
-
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;

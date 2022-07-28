@@ -1,12 +1,11 @@
 import { Box, List, ListItem, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import InputC from '../../../components/Input/Input';
 import ProgressLoading from '../../../components/Loading/Loading';
 import { ICreateProduct } from '../../../interface/product';
 import { required } from '../utils';
 import TextareaC from '../../../components/Textarea/Texarea';
 import ModalC from '../../../components/Modal/Modal';
-import DropzoneC from '../../../components/Dropzone/Dropzone';
 import { FastField, Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
@@ -19,8 +18,14 @@ interface Props {
 
 const ProductForm = (props: Props) => {
   const { onSubmit, loading, type, initialValues } = props;
-  const [openModal, setOpenModal] = React.useState(false);
-  const submitName = type === 'add' ? 'add product' : 'update product';
+  const [openModal, setOpenModal] = useState(false);
+  const [urlValue, setUrlValue] = useState('');
+  const [showErrorFile, setShowErrorFile] = useState(false);
+
+  console.log(showErrorFile);
+
+  const isAdd = type === 'add';
+  const submitName = isAdd ? 'add product' : 'update product';
 
   const isRequired = true ? <span className="isRequired"> *</span> : '';
 
@@ -32,17 +37,13 @@ const ProductForm = (props: Props) => {
     price: Yup.number().required(required),
     color: Yup.string().required(required),
     amount: Yup.number().required(required),
-    // thumbnailUrl: Yup.string().when('thumbnailUrl', {
-    //   is: 1,
-    //   then: Yup.string().required('This field is required.'),
-    //   otherwise: Yup.string().notRequired(),
-    // }),
+    thumbnailUrl: Yup.string().required(required),
   });
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       {(formikProps) => {
-        const { errors, resetForm } = formikProps;
+        const { values, errors, resetForm } = formikProps;
 
         return (
           <Form>
@@ -57,9 +58,9 @@ const ProductForm = (props: Props) => {
                 </Box>
               </ListItem>
               <ListItem className="section ID">
-                <Box>ID {isRequired}</Box>
+                <Box>ID {isAdd && isRequired}</Box>
                 <Box>
-                  <FastField name="id" component={InputC} />
+                  <FastField name="id" component={InputC} disabled={!isAdd} />
                   <Typography className="errorMessage">{errors ? errors?.id : ''}</Typography>
                 </Box>
               </ListItem>
@@ -108,7 +109,26 @@ const ProductForm = (props: Props) => {
               <ListItem className="section thumbnailUrl">
                 <Box>Thumbnail URL {isRequired}</Box>
                 <Box>
-                  <FastField name="thumbnailUrl" component={DropzoneC} />
+                  <FastField name="thumbnailUrl" component={InputC} setValue={setUrlValue} />
+                  <Box className="box-image">
+                    {urlValue === '/fallback-product-image.png' ? (
+                      <img src="/fallback-product-image.png" alt="error" />
+                    ) : (
+                      <img
+                        src={urlValue ? urlValue : initialValues?.thumbnailUrl}
+                        alt=""
+                        onError={() => setUrlValue('/fallback-product-image.png')}
+                      />
+                    )}
+
+                    <button
+                      className="buttonPreview"
+                      type="button"
+                      onClick={() => setUrlValue(values.thumbnailUrl)}
+                    >
+                      Preview Image
+                    </button>
+                  </Box>
                   <Typography className="errorMessage">
                     {errors ? errors?.thumbnailUrl : ''}
                   </Typography>
@@ -118,7 +138,7 @@ const ProductForm = (props: Props) => {
                 <button className="addButton" type="submit">
                   {loading ? <ProgressLoading size={28} /> : submitName}
                 </button>
-                {type !== 'add' ? (
+                {!isAdd ? (
                   <></>
                 ) : (
                   <button
