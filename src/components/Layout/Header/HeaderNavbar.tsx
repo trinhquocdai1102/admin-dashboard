@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import LogoutC from '../../Auth/Logout';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +29,7 @@ const HeaderNavbar = () => {
             Admin Management
           </Typography>
 
-          <Button color="inherit">Logout</Button>
+          <LogoutC />
         </Toolbar>
       </AppBar>
     </div>

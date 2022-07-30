@@ -6,6 +6,8 @@ export const validNumberRegex = /^[0-9]*$/;
 export const navbarHeight = 64;
 export const menuWidth = 240;
 
+export const requiredField = 'This field can not be blank.';
+
 export const colorSnackbarCustom = {
   warning: {
     color: '#fff',
@@ -24,3 +26,9 @@ export const colorSnackbarCustom = {
     background: 'rgb(46, 125, 50)',
   },
 };
+
+export const genderList = [
+  { id: 1, value: 'male', label: 'male' },
+  { id: 2, value: 'female', label: 'female' },
+  { id: 3, value: 'other', label: 'other' },
+];

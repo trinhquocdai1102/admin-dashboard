@@ -2,11 +2,11 @@ import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { perPage } from '../utils';
-import SelectC from '../../../components/Select/Select';
+import { perPage } from '../../page/Product/utils';
+import SelectC from '../Select/Select';
 import { Box } from '@mui/material';
 
-const theme = createTheme({
+export const themePagination = createTheme({
   components: {
     MuiPagination: {
       styleOverrides: {
@@ -85,14 +85,14 @@ interface Props {
   setItemPerPage: any;
 }
 
-const PaginationTable = (props: Props) => {
+const PaginationTableC = (props: Props) => {
   const { count, setPageNum, setItemPerPage, totalItem } = props;
 
   const handleChangePage = (_event: any, page: any) => {
     setPageNum(page);
   };
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themePagination}>
       <Box
         sx={{
           display: 'flex',
@@ -101,7 +101,7 @@ const PaginationTable = (props: Props) => {
           padding: '16px 0 12px',
         }}
       >
-        <SelectC name="Per page" listItem={perPage} setItemPerPage={setItemPerPage} />
+        <SelectC name="Per page" data={perPage} setItemPerPage={setItemPerPage} />
         <Box sx={{ margin: '12px 20px 0 40px' }}>
           <span style={{ paddingLeft: '6px' }}>Total: </span>
           <span style={{ fontWeight: 'bold', paddingLeft: '6px' }}>{totalItem}</span>
@@ -120,4 +120,4 @@ const PaginationTable = (props: Props) => {
   );
 };
 
-export default PaginationTable;
+export default PaginationTableC;

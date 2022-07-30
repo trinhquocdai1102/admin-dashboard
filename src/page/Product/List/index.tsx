@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
-import PaginationTable from './Pagination';
-import TableLabel from './Header';
-import ProductTable from './Product';
+import PaginationTableC from '../../../components/Product/Pagination';
+import TableLabelC from '../../../components/Product/Header';
+import ProductTableC from '../../../components/Product/Product';
 import '../../../styles/Product.scss';
 import { IProduct } from '../../../interface/product';
 import ButtonC from '../../../components/Button/Button';
@@ -117,14 +117,14 @@ const ProductsPage = () => {
         variant="contained"
         handleClick={() => navigate(ROUTESNAME.addProduct)}
       />
-      <TableLabel handleSelectAll={handleSelectAll} />
+      <TableLabelC handleSelectAll={handleSelectAll} />
       {loading ? (
         <ProgressLoading height="500px" />
       ) : (
         getAllProductsWithParam?.map((item: IProduct) => {
           return (
             <React.Fragment key={item.id}>
-              <ProductTable
+              <ProductTableC
                 product={item}
                 isOpacityAll={isOpacityAll}
                 handleDeleteItem={handleDeleteItem}
@@ -133,7 +133,7 @@ const ProductsPage = () => {
           );
         })
       )}
-      <PaginationTable
+      <PaginationTableC
         count={count}
         setPageNum={setPageNum}
         totalItem={totalItem}

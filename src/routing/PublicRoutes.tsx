@@ -1,20 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { Navigate, Outlet } from 'react-router-dom';
+import { getAuthorizeSelector } from '../redux/selectors';
 
-const useAuth = () => {
-  const user = localStorage.getItem('user');
-  if (user) {
-    return true;
-  } else {
-    return false;
-  }
-};
+const PublicRoutes = () => {
+  const isAuth = useSelector(getAuthorizeSelector);
 
-const PublicRoutes = (props: any) => {
-  const auth = useAuth();
-
-  return auth ? <Navigate to="/" /> : <Outlet />;
+  return isAuth ? <Navigate to="/" /> : <Outlet />;
 };
 
 export default PublicRoutes;

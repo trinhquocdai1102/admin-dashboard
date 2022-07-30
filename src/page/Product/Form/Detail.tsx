@@ -1,15 +1,16 @@
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import productApi from '../../../../api/productApi';
-import { ICreateProduct } from '../../../../interface/product';
-import { getProductDetailAction } from '../../../../redux/actions/products';
-import { setSnackbarAction } from '../../../../redux/actions/snackbar';
-import { detailProductSelector } from '../../../../redux/selectors';
-import { colorSnackbarCustom } from '../../../../ultis';
-import ProductForm from '../Form';
+import productApi from '../../../api/productApi';
+import { ICreateProduct } from '../../../interface/product';
+import { getProductDetailAction } from '../../../redux/actions/products';
+import { setSnackbarAction } from '../../../redux/actions/snackbar';
+import { detailProductSelector } from '../../../redux/selectors';
+import '../../../styles/FormProduct.scss';
+import { colorSnackbarCustom } from '../../../ultis';
+import ProductFormC from '../../../components/Product/Form';
 
 const DetailProductPage = () => {
   const { id } = useParams() as {
@@ -81,7 +82,7 @@ const DetailProductPage = () => {
           )
         </Typography>
       </Box>
-      <ProductForm
+      <ProductFormC
         onSubmit={onSubmit}
         loading={loading}
         initialValues={getProductDetail}

@@ -1,30 +1,14 @@
-export interface ILoginParams {
+export interface ILogin {
   email: string;
   password: string;
-  rememberMe: boolean;
-}
-
-export interface ILoginValidation {
-  email: string;
-  password: string;
-}
-
-export interface IRegisterParams {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  name: string;
   gender: string;
-  region: number;
-  state: number;
+  full_name: string;
+  rememberMe?: boolean;
 }
-
-export interface IRegisterValidation {
+export interface IRegister {
   email: string;
   password: string;
-  confirmPassword: string;
-  name: string;
+  confirm_password: string;
+  full_name: string;
   gender: string;
-  region: number | string;
-  state: number | string;
 }

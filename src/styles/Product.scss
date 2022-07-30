@@ -1,8 +1,13 @@
+@import 'variables';
+
 .main-product {
   padding: 0;
   padding-bottom: 20px;
 
     .addButton {
+      @extend %buttonShared;
+      color: #fff;
+      background-color: #3f51b5;
       margin: 20px 0;
     }
 }

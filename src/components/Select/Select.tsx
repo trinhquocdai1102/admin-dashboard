@@ -6,11 +6,16 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 interface Props {
   name?: string;
-  listItem?: any;
+  data?: any;
   labelId?: string;
   id?: string;
   value?: any;
+  field?: any;
+  setFieldValue?: any;
   setItemPerPage?: any;
+  classFormName?: string;
+  classSelectName?: string;
+  classItemName?: string;
 }
 
 const SelectC = (props: Props) => {
@@ -19,7 +24,6 @@ const SelectC = (props: Props) => {
 
   const handleChange = (event: SelectChangeEvent<typeof value>) => {
     setValue(event.target.value);
-    props.setItemPerPage(event.target.value);
   };
 
   const handleClose = () => {
@@ -31,9 +35,10 @@ const SelectC = (props: Props) => {
   };
 
   return (
-    <FormControl sx={{ marginTop: '10px' }}>
+    <FormControl sx={{ marginTop: '10px' }} className={props.classFormName}>
       <InputLabel>{props.name}</InputLabel>
       <Select
+        className={props.classSelectName}
         labelId={props.labelId}
         id={props.id}
         open={open}
@@ -41,12 +46,15 @@ const SelectC = (props: Props) => {
         onOpen={handleOpen}
         value={value}
         label={props.name}
-        onChange={handleChange}
-        defaultValue={10}
+        onChange={(event: SelectChangeEvent<typeof value>) => {
+          handleChange(event);
+          props.setItemPerPage && props.setItemPerPage(event.target.value);
+          props.setFieldValue && props.setFieldValue(props.field.name, event.target.value);
+        }}
       >
-        {props.listItem.map((item: any) => {
+        {props.data.map((item: any) => {
           return (
-            <MenuItem key={item.id} value={item.value}>
+            <MenuItem className={props.classItemName} key={item.id} value={item.value}>
               {item.label}
             </MenuItem>
           );

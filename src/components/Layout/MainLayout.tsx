@@ -8,27 +8,38 @@ import Grid from '@mui/material/Grid';
 import HeaderNavbar from './Header/HeaderNavbar';
 import { navbarHeight, menuWidth } from '../../ultis';
 import Footer from './Footer/Footer';
-import SnackbarC from '../Snackbar/Snackbar';
+import { useSelector } from 'react-redux';
+import BreadcrumbsC from '../Breadcrumb/Breadcrumb';
+import { getAuthorizeSelector } from '../../redux/selectors';
 
 interface Props extends PropsWithChildren {}
 
 const MainLayout: FC<Props> = ({ children }) => {
+  const isAuth = useSelector(getAuthorizeSelector);
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container>
-          <Grid item xs={12}>
-            <HeaderNavbar />
-          </Grid>
-          <Grid item xs={2} sx={{ marginTop: navbarHeight + 'px' }}>
-            <MenuComponent />
-          </Grid>
-          <Grid item xs={10} sx={{ marginLeft: menuWidth + 20 + 'px' }}>
+          {isAuth && (
+            <Grid item xs={12}>
+              <HeaderNavbar />
+            </Grid>
+          )}
+          {isAuth && (
+            <Grid item xs={2} sx={{ marginTop: navbarHeight + 'px' }}>
+              <MenuComponent />
+            </Grid>
+          )}
+          <Grid item xs={10} sx={{ marginLeft: menuWidth + 20 + 'px', minHeight: '400px' }}>
+            {isAuth && <BreadcrumbsC />}
             {children}
           </Grid>
-          <Grid item xs={12} sx={{ marginLeft: menuWidth + 'px' }}>
-            <Footer />
-          </Grid>
+          {isAuth && (
+            <Grid item xs={12} sx={{ marginLeft: menuWidth + 'px' }}>
+              <Footer />
+            </Grid>
+          )}
         </Grid>
       </Box>
     </>

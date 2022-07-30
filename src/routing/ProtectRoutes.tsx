@@ -1,30 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { Navigate, Outlet } from 'react-router-dom';
-
-const useAuth = () => {
-  //get item from localstorage
-
-  let user: any;
-
-  const _user = localStorage.getItem('user');
-
-  if (_user) {
-    user = JSON.parse(_user);
-    console.log('user', user);
-  }
-  if (user) {
-    return {
-      auth: true,
-      role: user.role,
-    };
-  } else {
-    return {
-      auth: false,
-      role: null,
-    };
-  }
-};
+import { getAuthorizeSelector } from '../redux/selectors';
 
 //protected Route state
 type ProtectedRouteType = {
@@ -32,11 +10,13 @@ type ProtectedRouteType = {
 };
 
 const ProtectedRoutes = (props: ProtectedRouteType) => {
-  const { auth, role } = useAuth();
+  const role = 'ADMIN';
+
+  const isAuth = useSelector(getAuthorizeSelector);
 
   //if the role required is there or not
   if (props.roleRequired) {
-    return auth ? (
+    return isAuth ? (
       props.roleRequired === role ? (
         <Outlet />
       ) : (
@@ -46,7 +26,7 @@ const ProtectedRoutes = (props: ProtectedRouteType) => {
       <Navigate to="/login" />
     );
   } else {
-    return auth ? <Outlet /> : <Navigate to="/login" />;
+    return isAuth ? <Outlet /> : <Navigate to="/login" />;
   }
 };
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { visuallyHidden } from '@mui/utils';
 import { TableCell, TableSortLabel, Box } from '@mui/material';
-import { CheckBoxC } from '../../../components/Checkbox/Checkbox';
-import { labelProductTable } from '../../../ultis/labelTable';
-import { IProduct } from '../../../interface/product';
+import { CheckBoxC } from '../Checkbox/Checkbox';
+import { labelProductTable } from '../../ultis/labelTable';
+import { IProduct } from '../../interface/product';
 import { makeStyles } from '@material-ui/core/styles';
 
 interface Props {
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TableLabel = (props: Props) => {
+const TableLabelC = (props: Props) => {
   const classes = useStyles();
   const { order_by, sort, handleSelectAll } = props;
 
@@ -77,4 +77,4 @@ const TableLabel = (props: Props) => {
   );
 };
 
-export default TableLabel;
+export default TableLabelC;

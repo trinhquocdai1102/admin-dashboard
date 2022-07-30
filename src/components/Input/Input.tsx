@@ -2,6 +2,7 @@ import * as React from 'react';
 import Input from '@mui/material/TextField';
 
 interface Props {
+  name?: string;
   style?: any;
   className?: string;
   label?: string;
@@ -9,23 +10,26 @@ interface Props {
   type?: string;
   value?: any;
   disabled?: boolean;
-  setValue: any;
+  placeholder?: string;
+  handleFocus?: () => void;
+  handleBlur?: () => void;
+  handleChange?: () => void;
+  setValue?: () => void;
 }
 
 const InputC = (props: Props) => {
-  const { name } = props.field;
   return (
     <Input
-      id={name}
       {...props.field}
       type={props.type}
       fullWidth
+      autoComplete="off"
+      placeholder={props.placeholder}
       disabled={props.disabled}
       label={props.label}
-      // onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-      //   props.setValue(event.target.value);
-      // }}
       className={props.className}
+      onFocus={props.handleFocus}
+      onBlur={props.handleBlur}
     />
   );
 };

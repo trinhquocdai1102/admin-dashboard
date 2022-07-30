@@ -1,15 +1,15 @@
 import { Box } from '@mui/material';
 import React, { useState } from 'react';
-import '../../../../styles/FormProduct.scss';
-import { ICreateProduct } from '../../../../interface/product';
-import productApi from '../../../../api/productApi';
+import '../../../styles/FormProduct.scss';
+import { ICreateProduct } from '../../../interface/product';
+import productApi from '../../../api/productApi';
 import { useDispatch } from 'react-redux';
-import { setSnackbarAction } from '../../../../redux/actions/snackbar';
-import { colorSnackbarCustom } from '../../../../ultis';
-import ProductForm from '../Form';
-import { ROUTESNAME } from '../../../../routing';
+import { setSnackbarAction } from '../../../redux/actions/snackbar';
+import { colorSnackbarCustom } from '../../../ultis';
+import ProductFormC from '../../../components/Product/Form';
+import { ROUTESNAME } from '../../../routing';
 import { useNavigate } from 'react-router-dom';
-import { getProductDetailAction } from '../../../../redux/actions/products';
+import { getProductDetailAction } from '../../../redux/actions/products';
 
 const AddProductPage = () => {
   const initialValues: ICreateProduct = {
@@ -58,7 +58,12 @@ const AddProductPage = () => {
   return (
     <Box className="main-form-product">
       <Box className="title">Add Product</Box>
-      <ProductForm onSubmit={onSubmit} loading={loading} type="add" initialValues={initialValues} />
+      <ProductFormC
+        onSubmit={onSubmit}
+        loading={loading}
+        type="add"
+        initialValues={initialValues}
+      />
     </Box>
   );
 };

@@ -1,13 +1,13 @@
 import { Box, List, ListItem, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import InputC from '../../../components/Input/Input';
-import ProgressLoading from '../../../components/Loading/Loading';
-import { ICreateProduct } from '../../../interface/product';
-import { required } from '../utils';
-import TextareaC from '../../../components/Textarea/Texarea';
-import ModalC from '../../../components/Modal/Modal';
+import InputC from '../Input/Input';
+import ProgressLoading from '../Loading/Loading';
+import { ICreateProduct } from '../../interface/product';
+import TextareaC from '../Textarea/Texarea';
+import ModalC from '../Modal/Modal';
 import { FastField, Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { requiredField } from '../../ultis';
 
 interface Props {
   loading: boolean;
@@ -16,7 +16,7 @@ interface Props {
   onSubmit(data: ICreateProduct): void;
 }
 
-const ProductForm = (props: Props) => {
+const ProductFormC = (props: Props) => {
   const { onSubmit, loading, type, initialValues } = props;
   const [openModal, setOpenModal] = useState(false);
   const [urlValue, setUrlValue] = useState('');
@@ -30,14 +30,14 @@ const ProductForm = (props: Props) => {
   const isRequired = true ? <span className="isRequired"> *</span> : '';
 
   const validationSchema = Yup.object().shape({
-    categoryId: Yup.string().required(required).nullable(),
-    id: Yup.string().required(required),
-    name: Yup.string().required(required),
-    description: Yup.string().required(required),
-    price: Yup.number().required(required),
-    color: Yup.string().required(required),
-    amount: Yup.number().required(required),
-    thumbnailUrl: Yup.string().required(required),
+    categoryId: Yup.string().required(requiredField).nullable(),
+    id: Yup.string().required(requiredField),
+    name: Yup.string().required(requiredField),
+    description: Yup.string().required(requiredField),
+    price: Yup.number().required(requiredField),
+    color: Yup.string().required(requiredField),
+    amount: Yup.number().required(requiredField),
+    thumbnailUrl: Yup.string().required(requiredField),
   });
 
   return (
@@ -167,4 +167,4 @@ const ProductForm = (props: Props) => {
   );
 };
 
-export default ProductForm;
+export default ProductFormC;

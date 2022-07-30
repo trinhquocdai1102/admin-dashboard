@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { TableCell } from '@mui/material';
 import { Button, TableRow } from '@mui/material';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { CheckBoxC } from '../../../components/Checkbox/Checkbox';
-import { ROUTESNAME } from '../../../routing';
-import { IProduct } from '../../../interface/product';
-import ModalC from '../../../components/Modal/Modal';
+import { CheckBoxC } from '../Checkbox/Checkbox';
+import { ROUTESNAME } from '../../routing';
+import { IProduct } from '../../interface/product';
+import ModalC from '../Modal/Modal';
 
 interface Props {
   labelId?: any;
@@ -17,7 +17,7 @@ interface Props {
   handleDeleteItem(id: string): void;
 }
 
-const ProductTable = (props: Props) => {
+const ProductTableC = (props: Props) => {
   const { product, labelId, isOpacityAll, handleDeleteItem } = props;
   const [isOpacity, setOpacity] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -101,4 +101,4 @@ const ProductTable = (props: Props) => {
   );
 };
 
-export default ProductTable;
+export default ProductTableC;
